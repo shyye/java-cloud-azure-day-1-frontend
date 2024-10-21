@@ -1,1 +1,7 @@
 <p>list works!</p>
+
+<ul>
+  <li *ngFor="let item of regions">
+    <a [routerLink]="['/regions', item.id]">{{ item.name }}</a>
+  </li>
+</ul>
