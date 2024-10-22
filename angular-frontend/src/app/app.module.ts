@@ -7,6 +7,7 @@ import { ListComponent } from './region/list/list.component';
 import { RegionModule } from './region/region.module';
 import { BuildingModule } from './building/building.module';
 import { CharacterModule } from './character/character.module';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 // import { ListComponent_character } from './region/list/list.component';
 
 @NgModule({
@@ -21,7 +22,7 @@ import { CharacterModule } from './character/character.module';
     BuildingModule,
     CharacterModule
   ],
-  providers: [],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
