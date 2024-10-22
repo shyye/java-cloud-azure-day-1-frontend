@@ -1,1 +1,20 @@
 <p>view works!</p>
+
+<ng-container *ngIf="region$ | async as region">
+    <div>
+        <h1>{{ region.name }}</h1>
+        <p>ID: {{ region.id }}</p>
+        <div *ngIf="region.buildings">
+            <h2>Buildings</h2>
+            <ul>
+                <li *ngFor="let building of region.buildings">{{ building.name }}</li>
+            </ul>
+        </div>
+        <div *ngIf="region.residents">
+            <h2>Residents</h2>
+            <ul>
+                <li *ngFor="let resident of region.residents">{{ resident.firstname }}</li>
+            </ul>
+        </div>
+    </div>
+</ng-container>

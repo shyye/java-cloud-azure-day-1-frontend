@@ -5,23 +5,22 @@ import { Region } from '../models/region';
 import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RegionService {
-
   // constructor() { }
 
-  private httpClient = inject(HttpClient)
+  private httpClient = inject(HttpClient);
 
-  regions: Observable<Region[]> = this.getAll()
+  regions: Observable<Region[]> = this.getAll();
 
   // Test
-  regionsList = [
-    { id: 1, name: 'Region 1', buildings: [], residents: [] },
-    { id: 2, name: 'Region 2', buildings: [], residents: [] },
-    { id: 3, name: 'Region 3', buildings: [], residents: [] },
-    { id: 4, name: 'Region 4', buildings: [], residents: [] }
-  ];
+  // regionsList = [
+  //   { id: 1, name: 'Region 1', buildings: [], residents: [] },
+  //   { id: 2, name: 'Region 2', buildings: [], residents: [] },
+  //   { id: 3, name: 'Region 3', buildings: [], residents: [] },
+  //   { id: 4, name: 'Region 4', buildings: [], residents: [] },
+  // ];
 
   /**
    * getAll
@@ -30,15 +29,35 @@ export class RegionService {
     // return this.httpClient.get<Region[]>(environment.apiUrlRegions)
 
     // Bing Copilot search help below, look up pipe():
-    return this.httpClient.get<{ status: string, data: Region[] }>(environment.apiUrlRegions)
-      .pipe(
-        map(response => response.data)
-      );
+    return this.httpClient
+      .get<{ status: string; data: Region[] }>(environment.apiUrlRegions)
+      .pipe(map((response) => response.data));
   }
 
-  // private httpClient = inject(HttpClient)
+  /**
+   * getById
+   */
+  // public getById(region: Region) {
+  //   return this.httpClient
+  //     .get<{ status: string; data: Region[] }>(
+  //       environment.apiUrlRegions + `/${region.id}`
+  //     )
+  //     .pipe(map((response) => response.data));
+  // }
+  // public getById(id: any | null): Region | null {
+  //   // const region = this.regions.find((region) => region.id === id);
+  //   // if (!region) {
+  //   //   return null
+  //   // }
+  //   // return region
+  //   return this.regions.pipe(
+  //     map((regions) => regions.find((region) => region.id === id) || null)
+  //   );
+  // }
 
-  // todos: Observable<Todo[]> = this.getAll()
-
-
+  public getById(id: any): Observable<Region | null> {
+    return this.regions.pipe(
+      map((regions) => regions.find((region) => region.id === Number(id)) || null)
+    );
+  }
 }

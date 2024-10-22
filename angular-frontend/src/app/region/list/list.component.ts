@@ -29,6 +29,4 @@ export class ListComponent {
   constructor(private readonly regionService: RegionService) {
     this.regions = this.regionService.regions;
   }
-  
-
 }
