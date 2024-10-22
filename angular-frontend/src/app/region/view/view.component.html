@@ -1,20 +1,24 @@
 <p>view works!</p>
 
-<ng-container *ngIf="region$ | async as region">
+<ng-container *ngIf="region$ | async as region; else loading">
     <div>
-        <h1>{{ region.name }}</h1>
+        <h2>{{ region.name }}</h2>
         <p>ID: {{ region.id }}</p>
         <div *ngIf="region.buildings">
-            <h2>Buildings</h2>
+            <h3>Buildings</h3>
             <ul>
                 <li *ngFor="let building of region.buildings">{{ building.name }}</li>
             </ul>
         </div>
         <div *ngIf="region.residents">
-            <h2>Residents</h2>
+            <h3>Residents</h3>
             <ul>
                 <li *ngFor="let resident of region.residents">{{ resident.firstname }}</li>
             </ul>
         </div>
     </div>
 </ng-container>
+
+<ng-template #loading>
+    <p>Loading...</p>
+</ng-template>
